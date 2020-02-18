@@ -29,3 +29,7 @@ environment variable to the name of your binary, and you're good to go!
 ## Customising Build & Test
 You can customise the build and testing in [`ci/build.bash`](./ci/build.bash) and [`ci/test.bash`](./ci/test.bash)
 respectively.
+
+## Known Issues
+
+- Currently you cannot rebuild a deployed release if you have already built that target, without manually deleting the release first. This will be fixed soon.
