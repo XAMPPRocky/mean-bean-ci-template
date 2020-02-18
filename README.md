@@ -21,10 +21,10 @@ projects and with the community.
 There are two main CI files in this template.
 
 - [`mean_bean_ci.yml`](./.github/workflows/mean_bean_ci.yml) — Handles push & pull request build and testing.
-- [`mean_bean_deploy.yml`](./.github/workflows/mean_bean_deploy.yml) — Handles deploying to GitHub Releases on tag push. Delete this if don't want any deployments.
+- [`mean_bean_deploy.yml`](./.github/workflows/mean_bean_deploy.yml) — Handles deploying to GitHub Releases on tag push.
 
-The only thing you need to change to make this template work is update the `BIN`
-environment variable to the name of your binary, and you're good to go!
+  - Update the [`BIN`](https://github.com/XAMPPRocky/mean-bean-ci-template/blob/master/.github/workflows/mean_bean_deploy.yml#L10) variable to be your binary's name before deploying.
+  - You can delete `mean_bean_deploy.yml` if don't want any deployments.
 
 ## Customising Build & Test
 You can customise the build and testing in [`ci/build.bash`](./ci/build.bash) and [`ci/test.bash`](./ci/test.bash)
