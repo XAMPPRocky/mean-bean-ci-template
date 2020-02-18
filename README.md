@@ -7,11 +7,11 @@ projects and with the community.
 
 ## Features
 
-- ⚒️ Test Everywhere. Build & Test your Rust project up to **50**
+- ⚒️ **Test Everywhere.** Build & Test your Rust project up to **50**
   different targets with three different release channels.
-- 🙅‍♀️ No Configuration. Set your binary name and you're good to go!
-- 🚁 Automatic GitHub Deployments. Build binaries for any tagged release.
-- 🏭 Massively Parallel. Each job is run in parallel, the only limit is your GitHub
+- 🙅‍♀️ **No Configuration.** Set your binary name and you're good to go!
+- 🚁 **Automatic GitHub Deployments.** Build binaries for any tagged release.
+- 🏭 **Massively Parallel.** Each job is run in parallel, the only limit is your GitHub
   plan.
 
 ## Using this template
