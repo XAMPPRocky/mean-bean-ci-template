@@ -1,6 +1,6 @@
 # 🦀 Ferris' Mean Bean CI Machine
 
-![Mean Bean CI](https://github.com/XAMPPRocky/mean-bean-ci-template/workflows/Mean%20Bean%20CI/badge.svg)
+[![Mean Bean CI](https://github.com/XAMPPRocky/mean-bean-ci-template/workflows/Mean%20Bean%20CI/badge.svg)](https://github.com/XAMPPRocky/mean-bean-ci-template/actions?query=workflow%3A%22Mean+Bean+CI%22)
 
 This is a template for GitHub Actions meant as a successor to [`japaric/trust`](https://github.com/japaric/trust)
 for handling [`XAMPPRocky/tokei`](https://github.com/XAMPPRocky/tokei)'s CI and
