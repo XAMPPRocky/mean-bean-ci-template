@@ -13,4 +13,4 @@ required_arg $CROSS 'CROSS'
 required_arg $TARGET_TRIPLE '<Target Triple>'
 
 $CROSS test --target $TARGET_TRIPLE
-$CROSS build --target $TARGET_TRIPLE --all-features
+$CROSS test --target $TARGET_TRIPLE --all-features
