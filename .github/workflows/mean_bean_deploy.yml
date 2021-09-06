@@ -133,8 +133,10 @@ jobs:
           # - wasm32-unknown-emscripten
           # Linux
           - aarch64-unknown-linux-gnu
+          - aarch64-unknown-linux-musl
           - arm-unknown-linux-gnueabi
           - armv7-unknown-linux-gnueabihf
+          - armv7-unknown-linux-musleabihf
           - i686-unknown-linux-gnu
           - i686-unknown-linux-musl
           - mips-unknown-linux-gnu
@@ -177,7 +179,21 @@ jobs:
       - run: chmod +x /tmp/cross
 
       - run: ci/set_rust_version.bash stable ${{ matrix.target }}
+      - name: Install cargo-deb
+        uses: actions-rs/cargo@v1
+        with:
+          command: install
+          args: cargo-deb
+        if: ${{ contains(matrix.target, 'linux-musl') }}
       - run: ci/build.bash /tmp/cross ${{ matrix.target }} RELEASE
+      - name: Build deb from binary
+        uses: actions-rs/cargo@v1
+        with:
+            command: deb
+            args: --no-build --target=${{ matrix.target }}
+        if: ${{ contains(matrix.target, 'linux-musl') }}
+      - name: Save deb name to environment for upload
+        run: echo DEB_NAME=$(basename $(find target/${{ matrix.target }}/debian -iname "${{env.BIN}}*.deb")) >> $GITHUB_ENV
       - run: tar -czvf ${{ env.BIN }}.tar.gz --directory=target/${{ matrix.target }}/release ${{ env.BIN }}
       - uses: XAMPPRocky/create-release@v1.0.2
         id: create_release
@@ -198,3 +214,14 @@ jobs:
           asset_path: ${{ env.BIN }}.tar.gz
           asset_name: ${{ env.BIN }}-${{ matrix.target }}.tar.gz
           asset_content_type: application/gzip
+      - name: Upload Release deb Asset
+        id: upload-release-asset-deb
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: target/${{ matrix.target }}/debian/${{ env.DEB_NAME }}
+          asset_name: ${{ env.DEB_NAME }}
+          asset_content_type: application/vnd.debian.binary-package
+        if: ${{ contains(matrix.target, 'linux-musl') }}
