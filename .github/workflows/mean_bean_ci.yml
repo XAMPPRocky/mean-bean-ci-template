@@ -107,7 +107,19 @@ jobs:
           path: /tmp/
       - run: chmod +x /tmp/cross
       - run: ci/set_rust_version.bash ${{ matrix.channel }} ${{ matrix.target }}
+      - name: Install cargo-deb
+        uses: actions-rs/cargo@v1
+        with:
+          command: install
+          args: cargo-deb
+        if: ${{ contains(matrix.target, 'linux-musl') }}
       - run: ci/build.bash /tmp/cross ${{ matrix.target }}
+      - name: Build deb from binary
+        uses: actions-rs/cargo@v1
+        with:
+            command: deb
+            args: --no-build --target=${{ matrix.target }}
+        if: ${{ contains(matrix.target, 'linux-musl') }}
         # These targets have issues with being tested so they are disabled
         # by default. You can try disabling to see if they work for
         # your project.
